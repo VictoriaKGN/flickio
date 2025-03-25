@@ -15,12 +15,28 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     final vm = Provider.of<HomeViewModel>(context);
 
-    return ListView(
-      padding: const EdgeInsets.only(top: 100, bottom: 40, left: 40, right: 40),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // MovieSection(title: "Trending", movies: vm.trending),
-        MovieSection(title: "In Theaters", movies: vm.nowPlaying),
-        // MovieSection(title: "Upcoming", movies: vm.upcoming),
+        SizedBox(height: 100),
+        Expanded(
+          child: ListView(
+            padding: const EdgeInsets.only(
+              top: 0,
+              bottom: 40,
+              left: 40,
+              right: 40,
+            ),
+            scrollDirection: Axis.vertical,
+            children: [
+              MovieSection(title: "Trending", movies: vm.trending),
+              MovieSection(title: "In Theaters", movies: vm.nowPlaying),
+              MovieSection(title: "Popular", movies: vm.popular),
+              MovieSection(title: "Top Rated", movies: vm.topRated),
+              MovieSection(title: "Upcoming", movies: vm.upcoming),
+            ],
+          ),
+        ),
       ],
     );
   }

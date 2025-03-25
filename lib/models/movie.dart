@@ -21,5 +21,5 @@ class Movie {
     );
   }
 
-  String get fullPosterUrl => "https://image.tmdb.org/t/p/original$posterPath";
+  String get fullCardPosterUrl => "https://image.tmdb.org/t/p/w342$posterPath";
 }
