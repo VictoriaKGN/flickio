@@ -11,7 +11,14 @@ class HomeViewModel extends ChangeNotifier {
   // final MovieApiService apiService;
 
   // List<Movie> trending = [];
-  List<Movie> nowPlaying = [Movie(id: 822119, title: "Beep Boop", posterPath: "/pzIddUEMWhWzfvLI3TwxUG2wGoi.jpg", backdropPath: "/qfAfE5auxsuxhxPpnETRAyTP5ff.jpg")];
+  List<Movie> nowPlaying = [
+    Movie(
+      id: 822119,
+      title: "Beep Boop",
+      posterPath: "/pzIddUEMWhWzfvLI3TwxUG2wGoi.jpg",
+      backdropPath: "/qfAfE5auxsuxhxPpnETRAyTP5ff.jpg",
+    ),
+  ];
   // List<Movie> upcoming = [];
 
   // HomeViewModel(this.apiService) {

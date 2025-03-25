@@ -16,10 +16,10 @@ class HomePage extends StatelessWidget {
     final vm = Provider.of<HomeViewModel>(context);
 
     return ListView(
-      padding: const EdgeInsets.only(bottom: 80),
+      padding: const EdgeInsets.only(top: 100, bottom: 40, left: 40, right: 40),
       children: [
         // MovieSection(title: "Trending", movies: vm.trending),
-        MovieSection(title: "Now Playing", movies: vm.nowPlaying),
+        MovieSection(title: "In Theaters", movies: vm.nowPlaying),
         // MovieSection(title: "Upcoming", movies: vm.upcoming),
       ],
     );

@@ -1,6 +1,11 @@
+// Flutter & Dart
 import 'package:flutter/material.dart';
-import '../../models/movie.dart';
+
+// Widgets
 import 'movie_card.dart';
+
+// Models
+import '../../models/movie.dart';
 
 class MovieSection extends StatelessWidget {
   final String title;
@@ -15,22 +20,26 @@ class MovieSection extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-          child: Text(
-            title,
-            style: Theme.of(context).textTheme.titleLarge,
+        Text(
+          title,
+          style: TextStyle(
+            fontSize: 18,
+            color: Theme.of(context).colorScheme.tertiary,
           ),
         ),
+        SizedBox(height: 20),
         SizedBox(
           height: 230,
-          child: ListView.builder(
+          child: ListView.separated(
             scrollDirection: Axis.horizontal,
             itemCount: movies.length,
-            padding: const EdgeInsets.only(left: 16),
             itemBuilder: (context, index) {
-              return MovieCard(movie: movies[index]);
+              return Padding(
+                padding: const EdgeInsets.only(right: 24),
+                child: MovieCard(movie: movies[index]),
+              );
             },
+            separatorBuilder: (_, _) => const SizedBox(width: 20),
           ),
         ),
       ],

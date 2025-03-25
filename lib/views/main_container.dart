@@ -57,9 +57,8 @@ class _MainContainerState extends State<MainContainer> {
         children: [
           // if NOT mobile
           if (!isMobile)
-            Padding(padding: const EdgeInsets.only(top: 40), child: navBar),
+            Padding(padding: const EdgeInsets.only(top: 20), child: navBar),
 
-          // Positioned.fill(child: _buildCurrentPage()),
           Expanded(child: _buildCurrentPage()),
 
           // if mobile
