@@ -1,4 +1,5 @@
 // Flutter
+import 'package:flickio/views/movie_detail/movie_detail_page.dart';
 import 'package:flutter/material.dart';
 
 // Models
@@ -13,10 +14,11 @@ class MovieCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final bool isMobile = screenWidth < 600;
+
     final double posterHeight = isMobile ? 150 : 200;
     final double posterWidth = isMobile ? 100 : 150;
 
-    return SizedBox(
+    final SizedBox movieCard = SizedBox(
       width: posterWidth,
       height: posterHeight,
       child: Column(
@@ -39,6 +41,16 @@ class MovieCard extends StatelessWidget {
           ),
         ],
       ),
+    );
+
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (_) => MovieDetailPage(movie: movie)),
+        );
+      },
+      child: movieCard,
     );
   }
 }
