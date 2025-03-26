@@ -1,6 +1,7 @@
 // Flutter
 import 'package:flickio/views/movie_detail/movie_detail_page.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 // Models
 import '../../models/movie.dart';
@@ -44,12 +45,7 @@ class MovieCard extends StatelessWidget {
     );
 
     return GestureDetector(
-      onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (_) => MovieDetailPage(movie: movie)),
-        );
-      },
+      onTap: () => context.go("/movie/${movie.id}", extra: movie),
       child: movieCard,
     );
   }

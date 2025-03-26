@@ -1,24 +1,17 @@
+// Flutter & Dart
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class NavBar extends StatelessWidget {
-  final List<String> pages;
-  final int selected;
-  final Function(int) onTabSelect;
+  final int selectedIndex;
 
-  const NavBar({
-    super.key,
-    required this.pages,
-    required this.selected,
-    required this.onTabSelect,
-  });
+  const NavBar({super.key, required this.selectedIndex});
 
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final bool isMobile = screenWidth < 600;
 
-    final double fontSize = isMobile ? 14 : 16;
-    final double itemWidth = isMobile ? 85 : 100;
     final double maxWidth = isMobile ? double.infinity : 480;
 
     return Center(
@@ -27,7 +20,7 @@ class NavBar extends StatelessWidget {
         constraints: BoxConstraints(maxWidth: maxWidth),
         padding: EdgeInsets.symmetric(
           horizontal: isMobile ? 0 : 25,
-          vertical: 15,
+          vertical: 10,
         ),
         decoration: BoxDecoration(
           color: Theme.of(context).colorScheme.secondary.withAlpha(51),
@@ -42,30 +35,53 @@ class NavBar extends StatelessWidget {
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: List.generate(pages.length, (index) {
-            final isSelected = selected == index;
-            return GestureDetector(
-              onTap: () => onTabSelect(index),
-              child: AnimatedContainer(
-                duration: Duration(microseconds: 250),
-                width: itemWidth,
-                child: Text(
-                  pages[index].toUpperCase(),
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color:
-                        isSelected
-                            ? Theme.of(context).colorScheme.tertiary
-                            : Theme.of(
-                              context,
-                            ).colorScheme.onPrimary.withAlpha(153),
-                    fontSize: fontSize,
-                    fontWeight: FontWeight.w200,
-                  ),
-                ),
-              ),
-            );
-          }),
+          children: [
+            _buildTab("Home", 0, context, isMobile),
+            _buildTab("Browse", 1, context, isMobile),
+            _buildTab("Watchlist", 2, context, isMobile),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildTab(
+    String label,
+    int index,
+    BuildContext context,
+    bool isMobile,
+  ) {
+    final isSelected = index == selectedIndex;
+
+    final double fontSize = isMobile ? 14 : 16;
+    final double itemWidth = isMobile ? 85 : 100;
+
+    return ButtonTheme(
+      minWidth: itemWidth,
+      child: TextButton(
+        onPressed: () {
+          switch (index) {
+            case 0:
+              context.go("/");
+              break;
+            case 1:
+              context.go("/browse");
+              break;
+            case 2:
+              context.go("/watchlist");
+              break;
+          }
+        },
+        child: Text(
+          label,
+          style: TextStyle(
+            fontSize: fontSize,
+            fontWeight: FontWeight.w200,
+            color:
+                isSelected
+                    ? Theme.of(context).colorScheme.tertiary
+                    : Theme.of(context).colorScheme.onPrimary.withAlpha(153),
+          ),
         ),
       ),
     );
