@@ -1,5 +1,6 @@
 // Flutter
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 // Models
 import '../../models/movie.dart';
@@ -34,16 +35,48 @@ class MovieDetailDesktop extends StatelessWidget {
           // right side - movie details
           Expanded(
             flex: 2,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  movie.title,
-                  style: Theme.of(context).textTheme.headlineMedium,
-                ),
-                SizedBox(height: 16),
-                Text(movie.overview),
-              ],
+            child: ConstrainedBox(
+              constraints: BoxConstraints(minWidth: 400),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    movie.title,
+                    style: Theme.of(context).textTheme.headlineMedium,
+                  ),
+
+                  SizedBox(height: 16),
+
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(movie.releaseDate),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(movie.ratingCount.toString()),
+
+                          SizedBox(width: 10),
+
+                          RatingBarIndicator(
+                            rating: movie.ratingAverage / 2,
+                            itemBuilder:
+                                (context, index) =>
+                                    Icon(Icons.star, color: Colors.amber),
+                            itemCount: 5,
+                            itemSize: 18,
+                            direction: Axis.horizontal,
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+
+                  SizedBox(height: 16),
+
+                  Text(movie.overview),
+                ],
+              ),
             ),
           ),
         ],

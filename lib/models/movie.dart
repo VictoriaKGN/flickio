@@ -4,6 +4,9 @@ class Movie {
   final String posterPath;
   final String backdropPath;
   final String overview;
+  final String releaseDate;
+  final double ratingAverage;
+  final int ratingCount;
   // TODO: add more
 
   Movie({
@@ -12,15 +15,21 @@ class Movie {
     required this.posterPath,
     required this.backdropPath,
     required this.overview,
+    required this.releaseDate,
+    required this.ratingAverage,
+    required this.ratingCount,
   });
 
   factory Movie.fromJson(Map<String, dynamic> json) {
     return Movie(
       id: json['id'],
-      title: json['title'] ?? '',
+      title: json['title'] ?? 'No title available.',
       posterPath: json['poster_path'] ?? '',
       backdropPath: json['backdrop_path'] ?? '',
-      overview: json["overview"] ?? '',
+      overview: json["overview"] ?? 'No overview available.',
+      releaseDate: json["release_date"] ?? "N/A",
+      ratingAverage: json["vote_average"] ?? 0,
+      ratingCount: json["vote_count"] ?? 0,
     );
   }
 
