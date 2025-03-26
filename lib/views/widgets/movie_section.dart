@@ -27,19 +27,18 @@ class MovieSection extends StatelessWidget {
             color: Theme.of(context).colorScheme.tertiary,
           ),
         ),
+
         SizedBox(height: 20),
+
         SizedBox(
           height: 230,
           child: ListView.separated(
             scrollDirection: Axis.horizontal,
             itemCount: movies.length,
             itemBuilder: (context, index) {
-              return Padding(
-                padding: const EdgeInsets.only(right: 24),
-                child: MovieCard(movie: movies[index]),
-              );
+              return MovieCard(movie: movies[index]);
             },
-            separatorBuilder: (_, _) => const SizedBox(width: 20),
+            separatorBuilder: (_, _) => const SizedBox(width: 24),
           ),
         ),
       ],

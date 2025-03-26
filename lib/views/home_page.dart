@@ -20,7 +20,7 @@ class HomePage extends StatelessWidget {
       children: [
         SizedBox(height: 100),
         Expanded(
-          child: ListView(
+          child: ListView.separated(
             padding: const EdgeInsets.only(
               top: 0,
               bottom: 40,
@@ -28,13 +28,20 @@ class HomePage extends StatelessWidget {
               right: 40,
             ),
             scrollDirection: Axis.vertical,
-            children: [
-              MovieSection(title: "Trending", movies: vm.trending),
-              MovieSection(title: "In Theaters", movies: vm.nowPlaying),
-              MovieSection(title: "Popular", movies: vm.popular),
-              MovieSection(title: "Top Rated", movies: vm.topRated),
-              MovieSection(title: "Upcoming", movies: vm.upcoming),
-            ],
+            itemCount: 5,
+            itemBuilder: (context, index) {
+              final sections = [
+                ("Trending", vm.trending),
+                ("In Theaters", vm.nowPlaying),
+                ("Popular", vm.popular),
+                ("Top Rated", vm.topRated),
+                ("Upcoming", vm.upcoming),
+              ];
+
+              final (title, movies) = sections[index];
+              return MovieSection(title: title, movies: movies);
+            },
+            separatorBuilder: (context, index) => const SizedBox(height: 35),
           ),
         ),
       ],
