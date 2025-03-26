@@ -7,7 +7,7 @@ import 'package:provider/provider.dart';
 import 'package:url_strategy/url_strategy.dart';
 
 // Views
-import 'package:flickio/views/home_page.dart';
+import 'package:flickio/views/home_view.dart';
 
 // View Models
 import 'viewmodels/home_viewmodel.dart';
