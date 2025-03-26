@@ -72,9 +72,43 @@ class MovieDetailDesktop extends StatelessWidget {
                     ],
                   ),
 
-                  SizedBox(height: 16),
+                  SizedBox(height: 35),
 
                   Text(movie.overview),
+
+                  SizedBox(height: 35),
+
+                  Wrap(
+                    spacing: 30,
+                    runSpacing: 10,
+                    children:
+                        movie.genres.map((genre) {
+                          return Chip(
+                            label: Text(
+                              genre.name,
+                              style: const TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w600,
+                                color: Colors.black87,
+                              ),
+                            ),
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 16,
+                              vertical: 10,
+                            ),
+                            backgroundColor:
+                                Theme.of(context).colorScheme.tertiary,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(100),
+                              side: BorderSide(style: BorderStyle.none),
+                            ),
+                          );
+                        }).toList(),
+                  ),
+
+                  SizedBox(height: 35),
+
+                  
                 ],
               ),
             ),
