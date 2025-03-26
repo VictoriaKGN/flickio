@@ -9,8 +9,8 @@ import 'widgets/nav_bar.dart';
 // View Models
 import '../viewmodels/home_viewmodel.dart';
 
-class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+class HomeView extends StatelessWidget {
+  const HomeView({super.key});
 
   @override
   Widget build(BuildContext context) {

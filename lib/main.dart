@@ -24,7 +24,7 @@ final GoRouter _router = GoRouter(
       builder:
           (context, state) => ChangeNotifierProvider(
             create: (_) => HomeViewModel(),
-            child: const HomePage(),
+            child: const HomeView(),
           ),
       routes: [
         GoRoute(
