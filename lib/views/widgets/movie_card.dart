@@ -19,6 +19,8 @@ class MovieCard extends StatelessWidget {
     final double posterHeight = isMobile ? 150 : 200;
     final double posterWidth = isMobile ? 100 : 150;
 
+    final location = GoRouterState.of(context).uri.toString();
+
     final SizedBox movieCard = SizedBox(
       width: posterWidth,
       height: posterHeight,
@@ -45,7 +47,7 @@ class MovieCard extends StatelessWidget {
     );
 
     return GestureDetector(
-      onTap: () => context.go("/movie/${movie.id}", extra: movie),
+      onTap: () => context.go('$location/movie/${movie.id}', extra: movie),
       child: movieCard,
     );
   }

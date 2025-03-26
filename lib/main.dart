@@ -8,9 +8,11 @@ import 'package:url_strategy/url_strategy.dart';
 
 // Views
 import 'package:flickio/views/home_view.dart';
+import 'package:flickio/views/browse_view.dart';
 
 // View Models
 import 'viewmodels/home_viewmodel.dart';
+import 'package:flickio/viewmodels/browse_viewmodel.dart';
 
 // Models
 import 'models/movie.dart';
@@ -25,6 +27,23 @@ final GoRouter _router = GoRouter(
           (context, state) => ChangeNotifierProvider(
             create: (_) => HomeViewModel(),
             child: const HomeView(),
+          ),
+      routes: [
+        GoRoute(
+          path: "/movie/:id",
+          builder: (context, state) {
+            final movie = state.extra as Movie;
+            return MovieDetailPage(movie: movie);
+          },
+        ),
+      ],
+    ),
+    GoRoute(
+      path: "/browse",
+      builder:
+          (context, state) => ChangeNotifierProvider(
+            create: (_) => BrowseViewmodel(),
+            child: const BrowseView(),
           ),
       routes: [
         GoRoute(
