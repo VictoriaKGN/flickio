@@ -34,15 +34,6 @@ final GoRouter _router = GoRouter(
                 create: (_) => HomeViewModel(),
                 child: const HomeView(),
               ),
-          routes: [
-            GoRoute(
-              path: "/movie/:id",
-              builder: (context, state) {
-                final movie = state.extra as Movie;
-                return MovieDetailPage(movie: movie);
-              },
-            ),
-          ],
         ),
         GoRoute(
           path: "/browse",
@@ -51,15 +42,13 @@ final GoRouter _router = GoRouter(
                 create: (_) => BrowseViewmodel(),
                 child: const BrowseView(),
               ),
-          routes: [
-            GoRoute(
-              path: "/movie/:id",
-              builder: (context, state) {
-                final movie = state.extra as Movie;
-                return MovieDetailPage(movie: movie);
-              },
-            ),
-          ],
+        ),
+        GoRoute(
+          path: "/movie/:id",
+          builder: (context, state) {
+            final movie = state.extra as Movie;
+            return MovieDetailPage(movie: movie);
+          },
         ),
       ],
     ),
