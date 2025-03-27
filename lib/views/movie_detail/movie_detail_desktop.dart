@@ -64,7 +64,7 @@ class MovieDetailDesktop extends StatelessWidget {
 
                       SizedBox(height: 35),
 
-                      ActionButtons(),
+                      ActionButtons(movie: movie),
                     ],
                   ),
                 ),

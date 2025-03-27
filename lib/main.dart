@@ -14,6 +14,7 @@ import 'main_container.dart';
 // View Models
 import 'viewmodels/home_viewmodel.dart';
 import 'viewmodels/browse_viewmodel.dart';
+import 'viewmodels/user_viewmodel.dart';
 
 // Models
 import 'models/movie.dart';
@@ -55,9 +56,19 @@ final GoRouter _router = GoRouter(
   ],
 );
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   setPathUrlStrategy();
-  runApp(MyApp());
+
+  final userVM = UserViewModel();
+  await userVM.loadUserData();
+
+  runApp(
+    ChangeNotifierProvider<UserViewModel>.value(
+      value: userVM,
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {

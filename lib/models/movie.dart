@@ -42,6 +42,19 @@ class Movie {
     );
   }
 
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'title': title,
+      'posterPath': posterPath,
+      'backdropPath': backdropPath,
+      'overview': overview,
+      'ratingAverage': ratingAverage,
+      'ratingCount': ratingCount,
+      'genres': genres.map((genre) => genre.toJson()).toList(),
+    };
+  }
+
   String get fullCardPosterUrl => "https://image.tmdb.org/t/p/w342$posterPath";
   String get fullDetailPosterUrl =>
       "https://image.tmdb.org/t/p/w500$posterPath";
