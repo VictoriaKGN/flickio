@@ -1,4 +1,7 @@
 // Flutter
+import 'package:flickio/data/stubs/now_playing.dart';
+import 'package:flickio/views/widgets/movie_section.dart';
+import 'package:flickio/views/widgets/nav_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -6,8 +9,9 @@ import 'package:provider/provider.dart';
 import '../viewmodels/browse_viewmodel.dart';
 
 // Widgets
-import 'widgets/nav_bar.dart';
-import 'widgets/movie_card.dart';
+import 'widgets/search_bar.dart';
+import 'widgets/genre_filter.dart';
+import '../views/widgets/movie_list.dart';
 
 class BrowseView extends StatelessWidget {
   const BrowseView({super.key});
@@ -15,28 +19,35 @@ class BrowseView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final vm = Provider.of<BrowseViewmodel>(context);
-    final isMobile =  MediaQuery.of(context).size.width < 600;
+    final isMobile = MediaQuery.of(context).size.width < 600;
 
     return Scaffold(
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          // TODO: add search field & genre filtering
-          Expanded(
-            child: GridView.builder(
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: isMobile ? 3 : 6,
-                // crossAxisSpacing: 16,
-                // mainAxisSpacing: 16
-              ),
-              itemCount: vm.movies.length,
-              itemBuilder: (context, index) {
-                final movie = vm.movies[index];
-                return MovieCard(movie: movie);
-              },
+      body: Padding(
+        padding: const EdgeInsets.all(40),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                MovieSearchBar(onChanged: vm.updateSearch),
+
+                SizedBox(width: 20),
+
+                Expanded(
+                  child: GenreFilter(
+                    selected: vm.selectedGenre,
+                    onSelect: vm.updateGenre,
+                  ),
+                ),
+              ],
             ),
-          ),
-        ],
+
+            SizedBox(height: 40),
+
+            Expanded(child: MovieList(movies: vm.movies)),
+          ],
+        ),
       ),
     );
   }
