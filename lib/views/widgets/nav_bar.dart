@@ -1,11 +1,11 @@
 // Flutter & Dart
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 class NavBar extends StatelessWidget {
-  final int selectedIndex;
-
-  const NavBar({super.key, required this.selectedIndex});
+  const NavBar({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -36,9 +36,9 @@ class NavBar extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            _buildTab("Home", 0, context, isMobile),
-            _buildTab("Browse", 1, context, isMobile),
-            _buildTab("Watchlist", 2, context, isMobile),
+            _buildTab("Home", '/', context, isMobile),
+            _buildTab("Browse", '/browse', context, isMobile),
+            _buildTab("Watchlist", 'watchlist', context, isMobile),
           ],
         ),
       ),
@@ -47,38 +47,29 @@ class NavBar extends StatelessWidget {
 
   Widget _buildTab(
     String label,
-    int index,
+    String route,
     BuildContext context,
     bool isMobile,
   ) {
-    final isSelected = index == selectedIndex;
+    final location = GoRouterState.of(context).uri.toString();
 
     final double fontSize = isMobile ? 14 : 16;
-    final double itemWidth = isMobile ? 85 : 100;
+    // final double itemWidth = 125;
 
-    return ButtonTheme(
-      minWidth: itemWidth,
+    return SizedBox(
+      width: 125,
       child: TextButton(
         onPressed: () {
-          switch (index) {
-            case 0:
-              context.go("/");
-              break;
-            case 1:
-              context.go("/browse");
-              break;
-            case 2:
-              context.go("/watchlist");
-              break;
-          }
+          context.go(route);
         },
         child: Text(
-          label,
+          label.toUpperCase(),
+          textAlign: TextAlign.center,
           style: TextStyle(
             fontSize: fontSize,
             fontWeight: FontWeight.w200,
             color:
-                isSelected
+                location == route
                     ? Theme.of(context).colorScheme.tertiary
                     : Theme.of(context).colorScheme.onPrimary.withAlpha(153),
           ),

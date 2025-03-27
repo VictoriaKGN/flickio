@@ -21,19 +21,13 @@ class BrowseView extends StatelessWidget {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-           // if NOT mobile
-          if (!isMobile)
-            Padding(
-              padding: const EdgeInsets.only(top: 20),
-              child: NavBar(selectedIndex: 1),
-            ),
-
+          // TODO: add search field & genre filtering
           Expanded(
             child: GridView.builder(
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: isMobile ? 6 : 3,
-                crossAxisSpacing: 16,
-                mainAxisSpacing: 16
+                crossAxisCount: isMobile ? 3 : 6,
+                // crossAxisSpacing: 16,
+                // mainAxisSpacing: 16
               ),
               itemCount: vm.movies.length,
               itemBuilder: (context, index) {
@@ -42,13 +36,6 @@ class BrowseView extends StatelessWidget {
               },
             ),
           ),
-
-          // if mobile
-          if (isMobile)
-            Padding(
-              padding: const EdgeInsets.only(bottom: 20),
-              child: NavBar(selectedIndex: 1),
-            ),
         ],
       ),
     );

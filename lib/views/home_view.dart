@@ -18,51 +18,32 @@ class HomeView extends StatelessWidget {
     final isMobile = MediaQuery.of(context).size.width < 600;
 
     return Scaffold(
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          // if NOT mobile
-          if (!isMobile)
-            Padding(
-              padding: const EdgeInsets.only(top: 20),
-              child: NavBar(selectedIndex: 0),
-            ),
+      body: Padding(
+        padding: const EdgeInsets.only(
+          top: 100,
+          bottom: 0,
+          left: 40,
+          right: 40,
+        ),
+        child: Expanded(
+          child: ListView.separated(
+            scrollDirection: Axis.vertical,
+            itemCount: 5,
+            itemBuilder: (context, index) {
+              final sections = [
+                ("Trending", vm.trending),
+                ("In Theaters", vm.nowPlaying),
+                ("Popular", vm.popular),
+                ("Top Rated", vm.topRated),
+                ("Upcoming", vm.upcoming),
+              ];
 
-          SizedBox(height: 100),
-
-          Expanded(
-            child: ListView.separated(
-              padding: const EdgeInsets.only(
-                top: 0,
-                bottom: 40,
-                left: 40,
-                right: 40,
-              ),
-              scrollDirection: Axis.vertical,
-              itemCount: 5,
-              itemBuilder: (context, index) {
-                final sections = [
-                  ("Trending", vm.trending),
-                  ("In Theaters", vm.nowPlaying),
-                  ("Popular", vm.popular),
-                  ("Top Rated", vm.topRated),
-                  ("Upcoming", vm.upcoming),
-                ];
-
-                final (title, movies) = sections[index];
-                return MovieSection(title: title, movies: movies);
-              },
-              separatorBuilder: (context, index) => const SizedBox(height: 35),
-            ),
+              final (title, movies) = sections[index];
+              return MovieSection(title: title, movies: movies);
+            },
+            separatorBuilder: (context, index) => const SizedBox(height: 35),
           ),
-
-          // if mobile
-          if (isMobile)
-            Padding(
-              padding: const EdgeInsets.only(bottom: 20),
-              child: NavBar(selectedIndex: 0),
-            ),
-        ],
+        ),
       ),
     );
   }
