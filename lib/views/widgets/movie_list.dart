@@ -9,27 +9,29 @@ import 'package:flickio/views/widgets/movie_card.dart';
 
 class MovieList extends StatelessWidget {
   final List<Movie> movies;
-  final double posterWidth;
-  final double minSpacing;
-  final double maxSpacing;
 
   const MovieList({
     super.key,
     required this.movies,
-    this.posterWidth = 150,
-    this.minSpacing = 50,
-    this.maxSpacing = 100,
   });
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final isMobile = screenWidth < 600;
+
+    final double posterWidth = isMobile ? 100 : 150;
+    final double minSpacing = isMobile ? 20 : 50;
+    final double maxSpacing = isMobile ? 50 : 100;
+    final double mainAxisSpacing = isMobile ? 20 : 50;
+
     return LayoutBuilder(
       builder: (context, constraints) {
         final totalWidth = constraints.maxWidth;
 
-        int postersPerRow =
+        int postersPerRow = 
             ((totalWidth + minSpacing) / (posterWidth + minSpacing)).floor();
-        postersPerRow = postersPerRow.clamp(3, 8);
+        postersPerRow = postersPerRow.clamp(2, 8);
 
         final totalPosterWidth = posterWidth * postersPerRow;
         final remainingWidth = totalWidth - totalPosterWidth;
@@ -37,13 +39,11 @@ class MovieList extends StatelessWidget {
         spacing = spacing.clamp(minSpacing, maxSpacing);
 
         return GridView.builder(
-          // shrinkWrap: true,
-          scrollDirection: Axis.vertical,
           itemCount: movies.length,
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: postersPerRow,
             crossAxisSpacing: spacing,
-            mainAxisSpacing: 50,
+            mainAxisSpacing: mainAxisSpacing,
             childAspectRatio: 2 / 3,
           ),
           itemBuilder: (context, index) {
