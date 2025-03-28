@@ -46,12 +46,13 @@ class Movie {
     return {
       'id': id,
       'title': title,
-      'posterPath': posterPath,
-      'backdropPath': backdropPath,
+      'poster_path': posterPath,
+      'backdrop_path': backdropPath,
       'overview': overview,
-      'ratingAverage': ratingAverage,
-      'ratingCount': ratingCount,
-      'genres': genres.map((genre) => genre.toJson()).toList(),
+      'release_date': releaseDate,
+      'vote_average': ratingAverage,
+      'vote_count': ratingCount,
+      'genre_ids': genres.map((genre) => genre.id).toList(),
     };
   }
 

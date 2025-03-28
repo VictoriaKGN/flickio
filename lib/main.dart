@@ -10,11 +10,13 @@ import 'package:url_strategy/url_strategy.dart';
 import 'views/home_view.dart';
 import 'views/browse_view.dart';
 import 'main_container.dart';
+import 'views/watchlist_view.dart';
 
 // View Models
 import 'viewmodels/home_viewmodel.dart';
 import 'viewmodels/browse_viewmodel.dart';
 import 'viewmodels/user_viewmodel.dart';
+import 'viewmodels/watchlist_viewmodel.dart';
 
 // Models
 import 'models/movie.dart';
@@ -50,6 +52,14 @@ final GoRouter _router = GoRouter(
             final movie = state.extra as Movie;
             return MovieDetailPage(movie: movie);
           },
+        ),
+        GoRoute(
+          path: "/watchlist",
+          builder:
+              (context, state) => ChangeNotifierProvider(
+                create: (_) => WatchlistViewmodel(),
+                child: const WatchlistView(),
+              ),
         ),
       ],
     ),

@@ -38,7 +38,7 @@ class NavBar extends StatelessWidget {
           children: [
             _buildTab("Home", '/', context, isMobile),
             _buildTab("Browse", '/browse', context, isMobile),
-            _buildTab("Watchlist", 'watchlist', context, isMobile),
+            _buildTab("Watchlist", '/watchlist', context, isMobile),
           ],
         ),
       ),
