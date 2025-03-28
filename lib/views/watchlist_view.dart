@@ -17,7 +17,6 @@ class WatchlistView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final vm = Provider.of<WatchlistViewmodel>(context);
-    final userVM = Provider.of<UserViewModel>(context);
     final isMobile = MediaQuery.of(context).size.width < 600;
 
     return Scaffold(
@@ -26,21 +25,34 @@ class WatchlistView extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                MovieSearchBar(onChanged: vm.updateSearch),
+            if (isMobile)
+              Column(
+                children: [
+                  MovieSearchBar(onChanged: vm.updateSearch),
 
-                SizedBox(width: 20),
+                  SizedBox(height: 20),
 
-                Expanded(
-                  child: GenreFilter(
+                  GenreFilter(
                     selected: vm.selectedGenre,
                     onSelect: vm.updateGenre,
                   ),
-                ),
-              ],
-            ),
+                ],
+              )
+            else
+              Row(
+                children: [
+                  MovieSearchBar(onChanged: vm.updateSearch),
+
+                  SizedBox(width: 20),
+
+                  Expanded(
+                    child: GenreFilter(
+                      selected: vm.selectedGenre,
+                      onSelect: vm.updateGenre,
+                    ),
+                  ),
+                ],
+              ),
 
             SizedBox(height: 40),
 

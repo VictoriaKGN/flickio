@@ -42,27 +42,47 @@ class _BrowseViewState extends State<BrowseView> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                MovieSearchBar(
-                  controller: _searchController,
-                  onChanged: vm.updateSearch,
-                ),
+            if (isMobile)
+              Column(
+                children: [
+                  MovieSearchBar(
+                    controller: _searchController,
+                    onChanged: vm.updateSearch,
+                  ),
 
-                SizedBox(width: 20),
+                  SizedBox(height: 20),
 
-                Expanded(
-                  child: GenreFilter(
+                  GenreFilter(
                     selected: vm.selectedGenre,
                     onSelect: (genre) {
                       _clearSearch();
                       vm.updateGenre(genre);
                     },
                   ),
-                ),
-              ],
-            ),
+                ],
+              )
+            else
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  MovieSearchBar(
+                    controller: _searchController,
+                    onChanged: vm.updateSearch,
+                  ),
+
+                  SizedBox(width: 20),
+
+                  Expanded(
+                    child: GenreFilter(
+                      selected: vm.selectedGenre,
+                      onSelect: (genre) {
+                        _clearSearch();
+                        vm.updateGenre(genre);
+                      },
+                    ),
+                  ),
+                ],
+              ),
 
             SizedBox(height: 40),
 

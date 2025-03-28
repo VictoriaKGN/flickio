@@ -54,10 +54,10 @@ class NavBar extends StatelessWidget {
     final location = GoRouterState.of(context).uri.toString();
 
     final double fontSize = isMobile ? 14 : 16;
-    // final double itemWidth = 125;
+    final double itemWidth = isMobile ? 105 : 125;
 
     return SizedBox(
-      width: 125,
+      width: itemWidth,
       child: TextButton(
         onPressed: () {
           context.go(route);

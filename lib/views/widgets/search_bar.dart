@@ -15,26 +15,29 @@ class MovieSearchBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: 300,
-      child: TextField(
-        controller: controller,
-        onChanged: onChanged,
-        decoration: InputDecoration(
-          hintText: hintText,
-          prefixIcon: Icon(
-            Icons.search,
-            color: Theme.of(context).colorScheme.tertiary,
-          ),
-          border: OutlineInputBorder(),
-          enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(
-              color: Theme.of(context).colorScheme.primary,
-            ),
-          ),
+    final bool isMobile = MediaQuery.of(context).size.width < 600;
+
+    return isMobile
+        ? _searchTextField(context)
+        : SizedBox(width: 300, child: _searchTextField(context));
+  }
+
+  Widget _searchTextField(BuildContext context) {
+    return TextField(
+      controller: controller,
+      onChanged: onChanged,
+      decoration: InputDecoration(
+        hintText: hintText,
+        prefixIcon: Icon(
+          Icons.search,
+          color: Theme.of(context).colorScheme.tertiary,
         ),
-        style: TextStyle(fontWeight: FontWeight.w100),
+        border: OutlineInputBorder(),
+        enabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: Theme.of(context).colorScheme.primary),
+        ),
       ),
+      style: TextStyle(fontWeight: FontWeight.w100),
     );
   }
 }
