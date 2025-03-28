@@ -2,6 +2,7 @@
 import 'package:flickio/theme/color_scheme.dart';
 import 'package:flickio/views/movie_detail/movie_detail_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:url_strategy/url_strategy.dart';
@@ -21,6 +22,10 @@ import 'viewmodels/watchlist_viewmodel.dart';
 // Models
 import 'models/movie.dart';
 
+// API Services
+import 'services/movie_api_service.dart';
+final movieApiService = MovieApiService();
+
 // Router
 // https://blog.codemagic.io/flutter-go-router-guide/
 final GoRouter _router = GoRouter(
@@ -34,7 +39,7 @@ final GoRouter _router = GoRouter(
           path: "/",
           builder:
               (context, state) => ChangeNotifierProvider(
-                create: (_) => HomeViewModel(),
+                create: (_) => HomeViewModel(movieApiService),
                 child: const HomeView(),
               ),
         ),
@@ -66,9 +71,10 @@ final GoRouter _router = GoRouter(
   ],
 );
 
-void main() async {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   setPathUrlStrategy();
+  await dotenv.load(fileName: '.env');
 
   final userVM = UserViewModel();
   await userVM.loadUserData();

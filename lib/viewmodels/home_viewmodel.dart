@@ -11,8 +11,11 @@ import 'package:flickio/data/stubs/upcoming.dart';
 // Models
 import '../models/movie.dart';
 
+// Services
+import '../services/movie_api_service.dart';
+
 class HomeViewModel extends ChangeNotifier {
-  // final MovieApiService apiService;
+  final MovieApiService apiService;
 
   List<Movie> trending = [];
   List<Movie> nowPlaying = [];
@@ -20,23 +23,39 @@ class HomeViewModel extends ChangeNotifier {
   List<Movie> topRated = [];
   List<Movie> upcoming = [];
 
+  bool isLoading = false;
+  bool isError = false;
+
   // HomeViewModel(this.apiService) {
   //   loadMovies();
   // }
-  HomeViewModel() {
+  HomeViewModel(this.apiService) {
     loadMovies();
   }
 
   Future<void> loadMovies() async {
-    //   trending = await apiService.fetchTrendingMovies();
-    //   nowPlaying = await apiService.fetchNowPlayingMovies();
-    //   upcoming = await apiService.fetchUpcomingMovies();
-    //   notifyListeners();
-    trending = getTrendingMovies();
-    nowPlaying = getNowPlayingMovies();
-    popular = getPopularMovies();
-    topRated = getTopRatedMovies();
-    upcoming = getUpcomingMovies();
+    isLoading = true;
     notifyListeners();
+
+    try {
+      final results = await Future.wait([
+        apiService.getTrending(),
+        apiService.getNowPlaying(),
+        apiService.getPopular(),
+        apiService.getTopRated(),
+        apiService.getUpcoming(),
+      ]);
+
+      trending = results[0];
+      nowPlaying = results[1];
+      popular = results[2];
+      topRated = results[3];
+      upcoming = results[4];
+    } catch (e) {
+      isError = true;
+    } finally {
+      isLoading = false;
+      notifyListeners();
+    }
   }
 }
