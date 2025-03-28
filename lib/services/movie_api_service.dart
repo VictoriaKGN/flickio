@@ -40,13 +40,22 @@ class MovieApiService {
   Future<List<Movie>> getPopular() => fetchMovies('/movie/popular');
   Future<List<Movie>> getTopRated() => fetchMovies('/movie/top_rated');
   Future<List<Movie>> getUpcoming() => fetchMovies('/movie/upcoming');
-  Future<List<Movie>> searchMovies(int? genreID, String? keywords) {
+  Future<List<Movie>> searchGenreMovies(int? genreID, int page) {
     return fetchMovies(
       '/discover/movie',
       params: {
-        'with_genres': genreID.toString(),
-        'with_keywords': keywords ?? "",
+        'with_genres': genreID?.toString() ?? "",
+        'page': page.toString(),
       },
+    );
+  }
+  Future<List<Movie>> searchTitleMovies(String query, int page ) {
+    return fetchMovies(
+      'search/movie',
+      params: {
+        'query': query,
+        'page': page.toString()
+      }
     );
   }
 }

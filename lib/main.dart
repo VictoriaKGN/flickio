@@ -47,7 +47,7 @@ final GoRouter _router = GoRouter(
           path: "/browse",
           builder:
               (context, state) => ChangeNotifierProvider(
-                create: (_) => BrowseViewmodel(),
+                create: (_) => BrowseViewmodel(movieApiService),
                 child: const BrowseView(),
               ),
         ),

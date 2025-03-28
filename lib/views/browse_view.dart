@@ -10,8 +10,26 @@ import 'widgets/search_bar.dart';
 import 'widgets/genre_filter.dart';
 import '../views/widgets/movie_list.dart';
 
-class BrowseView extends StatelessWidget {
+class BrowseView extends StatefulWidget {
   const BrowseView({super.key});
+
+  @override
+  State<BrowseView> createState() => _BrowseViewState();
+}
+
+class _BrowseViewState extends State<BrowseView> {
+  final TextEditingController _searchController = TextEditingController();
+
+  @override
+  void dispose() {
+    _searchController.dispose();
+    super.dispose();
+  }
+
+  void _clearSearch() {
+    _searchController.clear();
+    Provider.of<BrowseViewmodel>(context, listen: false).updateSearch('');
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,14 +45,20 @@ class BrowseView extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                MovieSearchBar(onChanged: vm.updateSearch),
+                MovieSearchBar(
+                  controller: _searchController,
+                  onChanged: vm.updateSearch,
+                ),
 
                 SizedBox(width: 20),
 
                 Expanded(
                   child: GenreFilter(
                     selected: vm.selectedGenre,
-                    onSelect: vm.updateGenre,
+                    onSelect: (genre) {
+                      _clearSearch();
+                      vm.updateGenre(genre);
+                    },
                   ),
                 ),
               ],
@@ -42,7 +66,26 @@ class BrowseView extends StatelessWidget {
 
             SizedBox(height: 40),
 
-            Expanded(child: MovieList(movies: vm.movies)),
+            if (vm.isLoading)
+              Center(child: CircularProgressIndicator())
+            else if (vm.isError)
+              Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text("There was an error fetching movies."),
+                    SizedBox(height: 10),
+                    FilledButton(
+                      onPressed: vm.loadMovies,
+                      child: const Text("Retry"),
+                    ),
+                  ],
+                ),
+              )
+            else if (vm.movies != null && vm.movies!.isNotEmpty)
+              Expanded(child: MovieList(movies: vm.movies!))
+            else
+              Center(child: Text("No movies found.")),
           ],
         ),
       ),
