@@ -30,16 +30,8 @@ class HomeView extends StatelessWidget {
             scrollDirection: Axis.vertical,
             itemCount: 5,
             itemBuilder: (context, index) {
-              final sections = [
-                ("Trending", vm.trending),
-                ("In Theaters", vm.nowPlaying),
-                ("Popular", vm.popular),
-                ("Top Rated", vm.topRated),
-                ("Upcoming", vm.upcoming),
-              ];
-
-              final (title, movies) = sections[index];
-              return MovieSection(title: title, movies: movies);
+              final (title, movies) = vm.sections[index];
+              return MovieSection(title: title, fetchMovies: movies);
             },
             separatorBuilder: (context, index) => const SizedBox(height: 35),
           ),

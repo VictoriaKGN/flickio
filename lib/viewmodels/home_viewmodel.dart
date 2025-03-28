@@ -16,46 +16,14 @@ import '../services/movie_api_service.dart';
 
 class HomeViewModel extends ChangeNotifier {
   final MovieApiService apiService;
+  final List<(String, Future<List<Movie>> Function())> sections;
 
-  List<Movie> trending = [];
-  List<Movie> nowPlaying = [];
-  List<Movie> popular = [];
-  List<Movie> topRated = [];
-  List<Movie> upcoming = [];
-
-  bool isLoading = false;
-  bool isError = false;
-
-  // HomeViewModel(this.apiService) {
-  //   loadMovies();
-  // }
-  HomeViewModel(this.apiService) {
-    loadMovies();
-  }
-
-  Future<void> loadMovies() async {
-    isLoading = true;
-    notifyListeners();
-
-    try {
-      final results = await Future.wait([
-        apiService.getTrending(),
-        apiService.getNowPlaying(),
-        apiService.getPopular(),
-        apiService.getTopRated(),
-        apiService.getUpcoming(),
-      ]);
-
-      trending = results[0];
-      nowPlaying = results[1];
-      popular = results[2];
-      topRated = results[3];
-      upcoming = results[4];
-    } catch (e) {
-      isError = true;
-    } finally {
-      isLoading = false;
-      notifyListeners();
-    }
-  }
+  HomeViewModel(this.apiService)
+    : sections = [
+        ('Trending', apiService.getTrending),
+        ('In Theaters', apiService.getNowPlaying),
+        ('Popular', apiService.getPopular),
+        ('Top Rated', apiService.getTopRated),
+        ('Upcoming', apiService.getUpcoming),
+      ];
 }

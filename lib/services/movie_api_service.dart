@@ -41,9 +41,12 @@ class MovieApiService {
   Future<List<Movie>> getTopRated() => fetchMovies('/movie/top_rated');
   Future<List<Movie>> getUpcoming() => fetchMovies('/movie/upcoming');
   Future<List<Movie>> searchMovies(int? genreID, String? keywords) {
-    return fetchMovies('/discover/movie', params: {
-      'with_genres': genreID.toString(),
-      'with_keywords': keywords ?? "",
-    });
-  } 
+    return fetchMovies(
+      '/discover/movie',
+      params: {
+        'with_genres': genreID.toString(),
+        'with_keywords': keywords ?? "",
+      },
+    );
+  }
 }
