@@ -44,7 +44,7 @@ class WatchlistView extends StatelessWidget {
 
             SizedBox(height: 40),
 
-            Expanded(child: MovieList(movies: userVM.user.watchlist)),
+            Expanded(child: MovieList(movies: vm.filteredWatchlist)),
           ],
         ),
       ),

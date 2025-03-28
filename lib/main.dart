@@ -24,6 +24,7 @@ import 'models/movie.dart';
 
 // API Services
 import 'services/movie_api_service.dart';
+
 final movieApiService = MovieApiService();
 
 // Router
@@ -62,7 +63,13 @@ final GoRouter _router = GoRouter(
           path: "/watchlist",
           builder:
               (context, state) => ChangeNotifierProvider(
-                create: (_) => WatchlistViewmodel(),
+                create: (context) {
+                  final userVM = Provider.of<UserViewModel>(
+                    context,
+                    listen: false,
+                  );
+                  return WatchlistViewmodel(userVM);
+                },
                 child: const WatchlistView(),
               ),
         ),
