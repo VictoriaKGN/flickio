@@ -28,7 +28,7 @@ class UserViewModel extends ChangeNotifier {
   Future<void> toggleWatchlist(Movie movie) async {
     if (_user.isInWatchlist(movie.id)) {
       await StorageService().removeFromWatchlist(movie);
-      _user.watchlist.removeWhere((movie) => movie.id == movie.id);
+      _user.watchlist.removeWhere((m) => movie.id == m.id);
     } else {
       await StorageService().addToWatchlist(movie);
       _user.watchlist.add(movie);
