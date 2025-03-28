@@ -1,7 +1,4 @@
 // Flutter
-import 'package:flickio/data/stubs/now_playing.dart';
-import 'package:flickio/views/widgets/movie_section.dart';
-import 'package:flickio/views/widgets/nav_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
