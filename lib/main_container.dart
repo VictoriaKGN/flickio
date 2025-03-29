@@ -47,8 +47,8 @@ class MainContainer extends StatelessWidget {
                       if (!visible) return SizedBox.shrink();
 
                       return DraggableScrollableSheet(
-                        initialChildSize: 0.4,
-                        minChildSize: 0.4,
+                        initialChildSize: 0.45,
+                        minChildSize: 0.45,
                         maxChildSize: 0.9,
                         builder: (context, scrollController) {
                           return ValueListenableBuilder<Movie?>(

@@ -1,5 +1,6 @@
 // Flutter
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 // Models
 import '../../models/movie.dart';
@@ -43,6 +44,17 @@ class _MovieDetailMobileState extends State<MovieDetailMobile> {
           widget.movie.fullDetailPosterUrl,
           width: double.infinity,
           fit: BoxFit.cover,
+        ),
+        Positioned(
+          top: 50,
+          left: 15,
+          child: IconButton.filledTonal(
+            onPressed: () {
+              context.pop();
+            },
+            icon: const Icon(Icons.arrow_back),
+            color: Theme.of(context).colorScheme.onSecondary,
+          ),
         ),
       ],
     );
