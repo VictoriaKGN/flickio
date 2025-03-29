@@ -50,6 +50,7 @@ class _MovieDetailMobileState extends State<MovieDetailMobile> {
           left: 15,
           child: IconButton.filledTonal(
             onPressed: () {
+              // TODO: fix this
               context.pop();
             },
             icon: const Icon(Icons.arrow_back),

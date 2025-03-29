@@ -20,9 +20,9 @@ class HomeView extends StatelessWidget {
     return Scaffold(
       body: Padding(
         padding: EdgeInsets.only(
-          top: isMobile ? 40 : 70,
-          left: 40,
-          right: 40,
+          top: isMobile ? 60 : 70,
+          left: isMobile ? 20 : 40,
+          right: isMobile ? 20 : 40,
         ),
         child: Expanded(
           child: ListView.separated(
