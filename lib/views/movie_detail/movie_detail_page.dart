@@ -1,11 +1,12 @@
 // Flutter
-import 'package:flickio/views/movie_detail/movie_detail_desktop.dart';
 import 'package:flutter/material.dart';
 
 // Models
 import '../../models/movie.dart';
 
 // Widgets
+import 'movie_detail_desktop.dart';
+import 'movie_detail_mobile.dart';
 
 class MovieDetailPage extends StatelessWidget {
   final Movie movie;
@@ -17,6 +18,11 @@ class MovieDetailPage extends StatelessWidget {
     final screenWidth = MediaQuery.of(context).size.width;
     final bool isMobile = screenWidth < 600;
 
-    return Scaffold(body: isMobile ? null : MovieDetailDesktop(movie: movie));
+    return Scaffold(
+      body:
+          isMobile
+              ? MovieDetailMobile(movie: movie)
+              : MovieDetailDesktop(movie: movie),
+    );
   }
 }

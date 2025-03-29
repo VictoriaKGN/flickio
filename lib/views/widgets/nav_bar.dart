@@ -67,7 +67,7 @@ class NavBar extends StatelessWidget {
           textAlign: TextAlign.center,
           style: TextStyle(
             fontSize: fontSize,
-            fontWeight: FontWeight.w200,
+            fontWeight: FontWeight.w400,
             color:
                 location == route
                     ? Theme.of(context).colorScheme.tertiary

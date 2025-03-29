@@ -8,7 +8,7 @@ class MovieHeader extends StatelessWidget {
   final int ratingCount;
   final double ratingAverage;
 
-  MovieHeader({
+  const MovieHeader({
     super.key,
     required this.title,
     required this.releaseDate,
@@ -18,8 +18,11 @@ class MovieHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final bool isMobile = MediaQuery.of(context).size.width < 600;
+
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+      crossAxisAlignment:
+          isMobile ? CrossAxisAlignment.center : CrossAxisAlignment.start,
       children: [
         Text(title, style: Theme.of(context).textTheme.headlineMedium),
 
