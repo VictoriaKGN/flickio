@@ -10,6 +10,7 @@ import 'controllers/bottom_sheet_controller.dart';
 // Widgets
 import 'views/movie_detail/widgets/movie_header.dart';
 import 'views/movie_detail/widgets/action_buttons.dart';
+import 'views/widgets/top_bar.dart';
 
 // Models
 import 'models/movie.dart';
@@ -30,6 +31,12 @@ class MainContainer extends StatelessWidget {
                 children: [
                   Column(
                     children: [
+                      // top bar
+                      Padding(
+                        padding: const EdgeInsets.all(25),
+                        child: TopBar(),
+                      ),
+
                       // page content
                       Expanded(child: child),
 
@@ -94,10 +101,13 @@ class MainContainer extends StatelessWidget {
               )
               : Column(
                 children: [
-                  // top nav bar
+                  // top bar with nav bar
                   Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 30),
-                    child: NavBar(),
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 30,
+                      horizontal: 40,
+                    ),
+                    child: TopBar(),
                   ),
 
                   // page content
