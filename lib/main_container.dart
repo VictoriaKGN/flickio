@@ -32,9 +32,16 @@ class MainContainer extends StatelessWidget {
                   Column(
                     children: [
                       // top bar
-                      Padding(
-                        padding: const EdgeInsets.all(25),
-                        child: TopBar(),
+                      ValueListenableBuilder<bool>(
+                        valueListenable: bottomSheetController.isVisible,
+                        builder: (context, visible, _) {
+                          if (visible) return SizedBox.shrink();
+
+                          return Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 20),
+                            child: TopBar(),
+                          );
+                        },
                       ),
 
                       // page content

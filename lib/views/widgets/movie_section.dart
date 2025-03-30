@@ -50,6 +50,9 @@ class _MovieSectionState extends State<MovieSection> {
 
   @override
   Widget build(BuildContext context) {
+    final isMobile = MediaQuery.of(context).size.width < 600;
+    final double sectionHeight = isMobile ? 160 : 230;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -65,13 +68,13 @@ class _MovieSectionState extends State<MovieSection> {
 
         if (isLoading)
           SizedBox(
-            height: 230,
+            height: sectionHeight,
             child: Center(child: CircularProgressIndicator()),
           )
         else if (error)
           Center(
             child: SizedBox(
-              height: 230,
+              height: sectionHeight,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -87,7 +90,7 @@ class _MovieSectionState extends State<MovieSection> {
           )
         else if (movies != null && movies!.isNotEmpty)
           SizedBox(
-            height: 230,
+            height: sectionHeight,
             child: ListView.separated(
               scrollDirection: Axis.horizontal,
               itemCount: movies!.length,

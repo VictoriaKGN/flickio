@@ -39,6 +39,7 @@ class MovieList extends StatelessWidget {
         spacing = spacing.clamp(minSpacing, maxSpacing);
 
         return GridView.builder(
+          padding: EdgeInsets.zero,
           itemCount: movies.length,
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: postersPerRow,

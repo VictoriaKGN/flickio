@@ -47,7 +47,7 @@ class MovieCard extends StatelessWidget {
     );
 
     return GestureDetector(
-      onTap: () => context.go(path, extra: movie),
+      onTap: () => context.push(path, extra: movie),
       child: movieCard,
     );
   }

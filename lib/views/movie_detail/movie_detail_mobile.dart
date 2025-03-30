@@ -51,7 +51,8 @@ class _MovieDetailMobileState extends State<MovieDetailMobile> {
           child: IconButton.filledTonal(
             onPressed: () {
               // TODO: fix this
-              context.pop();
+              bottomSheetController.hide();
+              GoRouter.of(context).pop();
             },
             icon: const Icon(Icons.arrow_back),
             color: Theme.of(context).colorScheme.onSecondary,

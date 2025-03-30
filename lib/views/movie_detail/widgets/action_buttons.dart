@@ -22,57 +22,55 @@ class ActionButtons extends StatelessWidget {
 
     final double buttonWidth = isMobile ? double.infinity : 250;
 
+    final watchlistBtn = FilledButton.icon(
+      onPressed: () {
+        userVM.toggleWatchlist(movie);
+      },
+      icon: Icon(isInWatchlist ? Icons.remove : Icons.add),
+      label: Text(
+        (isInWatchlist ? "Remove from Watchlist" : "Add to Watchlist")
+            .toUpperCase(),
+      ),
+      style: FilledButton.styleFrom(
+        padding: EdgeInsets.symmetric(
+          horizontal: 20,
+          vertical: isMobile ? 10 : 18,
+        ),
+        textStyle: const TextStyle(fontSize: 15),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
+      ),
+    );
+
+    final watchedBtn = FilledButton.icon(
+      onPressed: () {},
+      icon: const Icon(Icons.check),
+      label: Text("Mark as Watched".toUpperCase()),
+      style: FilledButton.styleFrom(
+        padding: EdgeInsets.symmetric(
+          horizontal: 20,
+          vertical: isMobile ? 10 : 18,
+        ),
+        textStyle: const TextStyle(
+          fontSize: 15,
+          // fontWeight:
+        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
+      ),
+    );
+
     return Wrap(
       spacing: 30,
       runSpacing: 10,
       children: [
-        // watchlist button
-        SizedBox(
-          width: buttonWidth,
-          child: FilledButton.icon(
-            onPressed: () {
-              userVM.toggleWatchlist(movie);
-            },
-            icon: Icon(isInWatchlist ? Icons.remove : Icons.add),
-            label: Text(
-              (isInWatchlist ? "Remove from Watchlist" : "Add to Watchlist")
-                  .toUpperCase(),
-            ),
-            style: FilledButton.styleFrom(
-              padding: EdgeInsets.symmetric(
-                horizontal: 20,
-                vertical: isMobile ? 10 : 18,
-              ),
-              textStyle: const TextStyle(fontSize: 15),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(4),
-              ),
-            ),
-          ),
-        ),
+        if (isMobile)
+          SizedBox(width: double.infinity, child: watchedBtn)
+        else
+          watchedBtn,
 
-        // watched button
-        SizedBox(
-          width: buttonWidth,
-          child: FilledButton.icon(
-            onPressed: () {},
-            icon: const Icon(Icons.check),
-            label: Text("Mark as Watched".toUpperCase()),
-            style: FilledButton.styleFrom(
-              padding: EdgeInsets.symmetric(
-                horizontal: 20,
-                vertical: isMobile ? 10 : 18,
-              ),
-              textStyle: const TextStyle(
-                fontSize: 15,
-                // fontWeight:
-              ),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(4),
-              ),
-            ),
-          ),
-        ),
+        if (isMobile)
+          SizedBox(width: double.infinity, child: watchedBtn)
+        else
+          watchedBtn,
 
         // TODO: add rating button
       ],

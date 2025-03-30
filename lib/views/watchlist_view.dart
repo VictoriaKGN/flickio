@@ -21,12 +21,7 @@ class WatchlistView extends StatelessWidget {
 
     return Scaffold(
       body: Padding(
-        padding: EdgeInsets.only(
-          top: isMobile ? 100 : 60,
-          left: isMobile ? 20 : 40,
-          right: isMobile ? 20 : 40,
-          bottom: isMobile ? 20 : 40,
-        ),
+        padding: EdgeInsets.symmetric(horizontal: isMobile ? 20 : 40),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -59,7 +54,7 @@ class WatchlistView extends StatelessWidget {
                 ],
               ),
 
-            SizedBox(height: 40),
+            SizedBox(height: 20),
 
             Expanded(child: MovieList(movies: vm.filteredWatchlist)),
           ],

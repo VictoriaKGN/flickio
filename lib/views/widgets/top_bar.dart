@@ -11,25 +11,27 @@ class TopBar extends StatelessWidget {
   Widget build(BuildContext context) {
     final bool isMobile = MediaQuery.of(context).size.width < 600;
 
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        ConstrainedBox(
-          constraints: BoxConstraints(maxHeight: 50),
-          child: Image.asset(
-            'assets/icon/flickio_large.png',
-            fit: BoxFit.contain,
+    return SafeArea(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          ConstrainedBox(
+            constraints: BoxConstraints(maxHeight: 50),
+            child: Image.asset(
+              'assets/icon/flickio_large.png',
+              fit: BoxFit.contain,
+            ),
           ),
-        ),
 
-        if (!isMobile) NavBar(),
+          if (!isMobile) NavBar(),
 
-        IconButton.filledTonal(
-          onPressed: () {},
-          icon: const Icon(Icons.person),
-          color: Theme.of(context).colorScheme.onSecondary,
-        ),
-      ],
+          IconButton.filledTonal(
+            onPressed: () {},
+            icon: const Icon(Icons.person),
+            color: Theme.of(context).colorScheme.onSecondary,
+          ),
+        ],
+      ),
     );
   }
 }

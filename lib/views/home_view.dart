@@ -19,13 +19,10 @@ class HomeView extends StatelessWidget {
 
     return Scaffold(
       body: Padding(
-        padding: EdgeInsets.only(
-          top: isMobile ? 60 : 70,
-          left: isMobile ? 20 : 40,
-          right: isMobile ? 20 : 40,
-        ),
+        padding: EdgeInsets.symmetric(horizontal: isMobile ? 20 : 40),
         child: Expanded(
           child: ListView.separated(
+            padding: EdgeInsets.zero,
             scrollDirection: Axis.vertical,
             itemCount: 5,
             itemBuilder: (context, index) {
