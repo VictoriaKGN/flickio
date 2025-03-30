@@ -20,8 +20,6 @@ class ActionButtons extends StatelessWidget {
     final isInWatchlist = userVM.user.isInWatchlist(movie.id);
     final bool isMobile = MediaQuery.of(context).size.width < 600;
 
-    final double buttonWidth = isMobile ? double.infinity : 250;
-
     final watchlistBtn = FilledButton.icon(
       onPressed: () {
         userVM.toggleWatchlist(movie);
@@ -63,9 +61,9 @@ class ActionButtons extends StatelessWidget {
       runSpacing: 10,
       children: [
         if (isMobile)
-          SizedBox(width: double.infinity, child: watchedBtn)
+          SizedBox(width: double.infinity, child: watchlistBtn)
         else
-          watchedBtn,
+          watchlistBtn,
 
         if (isMobile)
           SizedBox(width: double.infinity, child: watchedBtn)
