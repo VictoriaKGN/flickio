@@ -1,6 +1,7 @@
 // Models
 import 'movie.dart';
 
+// User Model
 class User {
   List<Movie> watchlist = [];
   // TODO: add rating list

@@ -8,9 +8,10 @@ import '../../../viewmodels/user_viewmodel.dart';
 // Models
 import '../../../models/movie.dart';
 
+/// Action buttons for movie detail view
+/// Currently only the watchlist button works
 class ActionButtons extends StatelessWidget {
   final Movie movie;
-  // TODO: add some vars here for buttons logic
 
   const ActionButtons({super.key, required this.movie});
 

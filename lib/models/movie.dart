@@ -1,6 +1,7 @@
 // Models
 import 'genre.dart';
 
+/// Movie Model
 class Movie {
   final int id;
   final String title;

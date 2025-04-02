@@ -11,6 +11,7 @@ import 'package:flickio/data/stubs/trending.dart';
 // View Model
 import 'user_viewmodel.dart';
 
+/// View model for the watchlist view
 class WatchlistViewmodel extends ChangeNotifier {
   final UserViewModel userVM;
 
@@ -20,6 +21,7 @@ class WatchlistViewmodel extends ChangeNotifier {
 
   WatchlistViewmodel(this.userVM);
 
+  /// List of movies filtered bt search query and selected genre
   List<Movie> get filteredWatchlist {
     final saved = userVM.user.watchlist;
 
@@ -31,11 +33,13 @@ class WatchlistViewmodel extends ChangeNotifier {
     }).toList();
   }
 
+  /// Updates search query and filters movies accordingly
   void updateSearch(String text) {
     searchQuery = text;
     notifyListeners();
   }
 
+  /// Updates selected genre and filters movies accordingly
   void updateGenre(Genre? genre) {
     selectedGenre = genre;
     notifyListeners();

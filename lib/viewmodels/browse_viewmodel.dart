@@ -12,6 +12,7 @@ import 'package:flickio/data/stubs/trending.dart';
 // Services
 import '../services/movie_api_service.dart';
 
+/// View model for browse view
 class BrowseViewmodel extends ChangeNotifier {
   final MovieApiService apiService;
   List<Movie>? movies;
@@ -27,6 +28,8 @@ class BrowseViewmodel extends ChangeNotifier {
     loadMovies();
   }
 
+  /// Loads movies from the API service
+  /// Fetches movies by movie if search query is provided, otherwise by genre
   Future<void> loadMovies() async {
     isLoading = true;
     notifyListeners();
@@ -51,6 +54,7 @@ class BrowseViewmodel extends ChangeNotifier {
     notifyListeners();
   }
 
+  /// Updates the search query and loads the appropriate movies
   void updateSearch(String query) {
     searchQuery = query;
     selectedGenre = null;
@@ -58,6 +62,7 @@ class BrowseViewmodel extends ChangeNotifier {
     loadMovies();
   }
 
+  /// Updates the selected genre and loads the approriate movies
   void updateGenre(Genre? genre) {
     selectedGenre = genre;
     searchQuery = "";
@@ -67,11 +72,14 @@ class BrowseViewmodel extends ChangeNotifier {
     loadMovies();
   }
 
+  /// Goes to a specific page on the frontend
+  /// Currently not being in use
   void goToPage(int page) {
     currPage = page;
     loadMovies();
   }
 
+  /// Disposal function
   @override
   void dispose() {
     _debounce?.cancel();

@@ -5,9 +5,11 @@ import 'package:shared_preferences/shared_preferences.dart';
 // Models
 import '../models/movie.dart';
 
+/// Local storage Service
 class StorageService {
   static const _watchlistKey = 'watchlist';
 
+  /// Fetches movie watchlist from localstorage
   Future<List<Movie>> getWatchlist() async {
     try {
       final prefs = await SharedPreferences.getInstance();
@@ -18,6 +20,7 @@ class StorageService {
     }
   }
 
+  /// Saves a movie to the watchlist
   Future<void> addToWatchlist(Movie movie) async {
     try {
       final prefs = await SharedPreferences.getInstance();
@@ -29,6 +32,7 @@ class StorageService {
     }
   }
 
+  /// Removes a movie from the watchlist
   Future<void> removeFromWatchlist(Movie movie) async {
     try {
       final prefs = await SharedPreferences.getInstance();

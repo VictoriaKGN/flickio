@@ -9,6 +9,8 @@ import '../services/storage_service.dart';
 import '../models/movie.dart';
 import '../models/user.dart';
 
+/// View model for the user
+/// Being used as a global VM to access the User object
 class UserViewModel extends ChangeNotifier {
   final User _user = User();
   final bool isFetching = false;
@@ -16,6 +18,8 @@ class UserViewModel extends ChangeNotifier {
 
   User get user => _user;
 
+  /// Loads the user's watchlist and reviews
+  /// Currently not being in use
   Future<void> loadUserData() async {
     final watchlist = await StorageService().getWatchlist();
     _user.watchlist = watchlist;
@@ -25,6 +29,7 @@ class UserViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
+  /// Toggles whether the movie needs to be added or removed from the saved watchlist
   Future<void> toggleWatchlist(Movie movie) async {
     if (_user.isInWatchlist(movie.id)) {
       await StorageService().removeFromWatchlist(movie);

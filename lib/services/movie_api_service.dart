@@ -6,10 +6,13 @@ import 'package:http/http.dart' as http;
 // Models
 import '../models/movie.dart';
 
+/// Movie API Service
+/// Sends requests to TMDB
 class MovieApiService {
   static const String _baseUrl = 'https://api.themoviedb.org/3';
   static final String _apiKey = dotenv.env['API_KEY'] ?? "";
 
+  /// Sends get request to a specific endpoint
   Future<List<Movie>> fetchMovies(
     String endpoint, {
     Map<String, String>? params,

@@ -14,6 +14,7 @@ import '../models/movie.dart';
 // Services
 import '../services/movie_api_service.dart';
 
+/// View model for the home view
 class HomeViewModel extends ChangeNotifier {
   final MovieApiService apiService;
   final List<(String, Future<List<Movie>> Function())> sections;

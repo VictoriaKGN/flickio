@@ -15,6 +15,8 @@ import 'views/widgets/top_bar.dart';
 // Models
 import 'models/movie.dart';
 
+/// Wrapper widget for other views
+/// Includes nav bar and top bar 
 class MainContainer extends StatelessWidget {
   final Widget child;
 

@@ -1,3 +1,4 @@
+/// User movie rating/review Model
 class UserMovie {
   final int movieID;
   bool isInWatchlist;
